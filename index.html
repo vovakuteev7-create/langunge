@@ -1,1 +1,396 @@
+<!DOCTYPE html>
+<html lang="ru">
 
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title>Языки разметки: XTL, HTML, YAME, YTL</title>
+	<style>
+		* {
+			margin: 0;
+			padding: 0;
+			box-sizing: border-box;
+			font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+		}
+
+		body {
+			background: linear-gradient(135deg, #1a2a6c, #b21f1f, #fdbb2d);
+			color: #333;
+			line-height: 1.6;
+			padding: 20px;
+			min-height: 100vh;
+		}
+
+		.container {
+			max-width: 1200px;
+			margin: 0 auto;
+		}
+
+		header {
+			text-align: center;
+			padding: 30px 0;
+			color: white;
+			text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
+		}
+
+		h1 {
+			font-size: 2.8rem;
+			margin-bottom: 10px;
+		}
+
+		.subtitle {
+			font-size: 1.2rem;
+			opacity: 0.9;
+		}
+
+		.languages-grid {
+			display: grid;
+			grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+			gap: 25px;
+			margin-top: 30px;
+		}
+
+		.language-card {
+			background: rgba(255, 255, 255, 0.9);
+			border-radius: 12px;
+			overflow: hidden;
+			box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2);
+			transition: transform 0.3s, box-shadow 0.3s;
+			display: flex;
+			flex-direction: column;
+		}
+
+		.language-card:hover {
+			transform: translateY(-5px);
+			box-shadow: 0 15px 30px rgba(0, 0, 0, 0.3);
+		}
+
+		.card-header {
+			padding: 20px;
+			color: white;
+			text-align: center;
+		}
+
+		.html .card-header {
+			background: linear-gradient(to right, #e44d26, #f16529);
+		}
+
+		.xtl .card-header {
+			background: linear-gradient(to right, #6a1b9a, #8e24aa);
+		}
+
+		.yame .card-header {
+			background: linear-gradient(to right, #1565c0, #1976d2);
+		}
+
+		.ytl .card-header {
+			background: linear-gradient(to right, #2e7d32, #388e3c);
+		}
+
+		.card-body {
+			padding: 20px;
+			flex-grow: 1;
+		}
+
+		h3 {
+			font-size: 1.8rem;
+			margin-bottom: 10px;
+		}
+
+		.description {
+			margin-bottom: 15px;
+			color: #555;
+		}
+
+		.code-block {
+			background: #2d2d2d;
+			color: #f8f8f2;
+			padding: 15px;
+			border-radius: 8px;
+			font-family: 'Courier New', monospace;
+			font-size: 0.9rem;
+			overflow-x: auto;
+			margin-top: 15px;
+		}
+
+		.code-comment {
+			color: #75715e;
+		}
+
+		.code-tag {
+			color: #f92672;
+		}
+
+		.code-attr {
+			color: #a6e22e;
+		}
+
+		.code-string {
+			color: #e6db74;
+		}
+
+		.download-section {
+			background: #f5f5f5;
+			padding: 15px 20px;
+			border-top: 1px solid #e0e0e0;
+		}
+
+		.download-title {
+			font-weight: bold;
+			margin-bottom: 10px;
+			color: #444;
+		}
+
+		.download-links {
+			display: flex;
+			flex-wrap: wrap;
+			gap: 10px;
+		}
+
+		.download-btn {
+			display: inline-block;
+			padding: 8px 15px;
+			background: #4a4a4a;
+			color: white;
+			text-decoration: none;
+			border-radius: 5px;
+			font-size: 0.9rem;
+			transition: background 0.3s;
+		}
+
+		.download-btn:hover {
+			background: #333;
+		}
+
+		.html .download-btn {
+			background: #e44d26;
+		}
+
+		.html .download-btn:hover {
+			background: #c53717;
+		}
+
+		.xtl .download-btn {
+			background: #6a1b9a;
+		}
+
+		.xtl .download-btn:hover {
+			background: #4a148c;
+		}
+
+		.yame .download-btn {
+			background: #1565c0;
+		}
+
+		.yame .download-btn:hover {
+			background: #0d47a1;
+		}
+
+		.ytl .download-btn {
+			background: #2e7d32;
+		}
+
+		.ytl .download-btn:hover {
+			background: #1b5e20;
+		}
+
+		footer {
+			text-align: center;
+			margin-top: 40px;
+			color: white;
+			padding: 20px;
+			font-size: 0.9rem;
+			opacity: 0.8;
+		}
+
+		@media (max-width: 768px) {
+			h1 {
+				font-size: 2.2rem;
+			}
+
+			.languages-grid {
+				grid-template-columns: 1fr;
+			}
+
+			.download-links {
+				flex-direction: column;
+			}
+		}
+	</style>
+</head>
+
+<body>
+	<div class="container">
+		<header>
+			<h1>Языки разметки</h1>
+			<p class="subtitle">Сравнительный обзор XTL, HTML, YAME и YTL</p>
+		</header>
+
+		<div class="languages-grid">
+			<!-- HTML Card -->
+			<div class="language-card html">
+				<div class="card-header">
+					<h3>HTML</h3>
+					<p>HyperText Markup Language</p>
+				</div>
+				<div class="card-body">
+					<p class="description">Стандартный язык разметки для создания веб-страниц и веб-приложений.</p>
+					<div class="code-block">
+						<span class="code-comment">&lt;!-- Пример HTML документа --&gt;</span><br>
+						<span class="code-tag">&lt;!DOCTYPE</span>
+						<span class="code-attr">html</span><span class="code-tag">&gt;</span><br>
+						<span class="code-tag">&lt;html</span>
+						<span class="code-attr">lang</span>=<span class="code-string">"ru"</span><span class="code-tag">&gt;</span><br>
+						<span class="code-tag">&lt;head&gt;</span><br>
+                        &nbsp;&nbsp;<span class="code-tag">&lt;title&gt;</span>Моя
+						страница<span class="code-tag">&lt;/title&gt;</span><br>
+						<span class="code-tag">&lt;/head&gt;</span><br>
+						<span class="code-tag">&lt;body&gt;</span><br>
+                        &nbsp;&nbsp;<span class="code-tag">&lt;h1&gt;</span>Привет,
+						мир!<span class="code-tag">&lt;/h1&gt;</span><br>
+						<span class="code-tag">&lt;/body&gt;</span><br>
+						<span class="code-tag">&lt;/html&gt;</span>
+					</div>
+				</div>
+				<div class="download-section">
+					<div class="download-title">Скачать инструменты HTML:</div>
+					<div class="download-links">
+						<a href="https://www.w3.org/TR/html52/" class="download-btn" target="_blank">Спецификация</a>
+						<a href="https://developer.mozilla.org/ru/docs/Web/HTML" class="download-btn"
+							target="_blank">Документация</a>
+						<a href="https://html.spec.whatwg.org/" class="download-btn" target="_blank">Стандарт</a>
+					</div>
+				</div>
+			</div>
+
+			<!-- XTL Card -->
+			<div class="language-card xtl">
+				<div class="card-header">
+					<h3>XTL</h3>
+					<p>eXtensible Template Language</p>
+				</div>
+				<div class="card-body">
+					<p class="description">Язык шаблонов на основе XML для генерации различных форматов вывода.</p>
+					<div class="code-block">
+						<span class="code-comment">&lt;!-- Пример XTL шаблона --&gt;</span><br>
+						<span class="code-tag">&lt;template</span>
+						<span class="code-attr">name</span>=<span class="code-string">"userCard"</span><span class="code-tag">&gt;</span><br>
+                        &nbsp;&nbsp;<span class="code-tag">&lt;div</span>
+						<span class="code-attr">class</span>=<span class="code-string">"user"</span><span class="code-tag">&gt;</span><br>
+                        &nbsp;&nbsp;&nbsp;&nbsp;<span class="code-tag">&lt;h2&gt;</span>{{name}}<span class="code-tag">&lt;/h2&gt;</span><br>
+                        &nbsp;&nbsp;&nbsp;&nbsp;<span class="code-tag">&lt;p&gt;</span>Email:
+						{{email}}<span class="code-tag">&lt;/p&gt;</span><br>
+                        &nbsp;&nbsp;&nbsp;&nbsp;<span class="code-tag">&lt;if</span>
+						<span class="code-attr">condition</span>=<span class="code-string">"admin"</span><span class="code-tag">&gt;</span><br>
+                        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="code-tag">&lt;span&gt;</span>Администратор<span class="code-tag">&lt;/span&gt;</span><br>
+                        &nbsp;&nbsp;&nbsp;&nbsp;<span class="code-tag">&lt;/if&gt;</span><br>
+                        &nbsp;&nbsp;<span class="code-tag">&lt;/div&gt;</span><br>
+						<span class="code-tag">&lt;/template&gt;</span>
+					</div>
+				</div>
+				<div class="download-section">
+					<div class="download-title">Скачать XTL:</div>
+					<div class="download-links">
+						<a href="#" class="download-btn">XTL Компилятор (v2.1)</a>
+						<a href="#" class="download-btn">Документация</a>
+						<a href="#" class="download-btn">Примеры шаблонов</a>
+					</div>
+				</div>
+			</div>
+
+			<!-- YAME Card -->
+			<div class="language-card yame">
+				<div class="card-header">
+					<h3>YAME</h3>
+					<p>Yet Another Markup Extension</p>
+				</div>
+				<div class="card-body">
+					<p class="description">Расширяемый язык разметки с поддержкой макросов и пользовательских тегов.</p>
+					<div class="code-block">
+						<span class="code-comment"># Пример YAME документа</span><br>
+						<span class="code-tag">@macro</span> <span class="code-attr">button</span>(text, color="blue")
+						{<br>
+                        &nbsp;&nbsp;<span class="code-tag">&lt;button</span>
+						<span class="code-attr">class</span>=<span class="code-string">"btn btn-{{color}}"</span><span class="code-tag">&gt;</span><br>
+                        &nbsp;&nbsp;&nbsp;&nbsp;{{text}}<br>
+                        &nbsp;&nbsp;<span class="code-tag">&lt;/button&gt;</span><br>
+                        }<br><br>
+						<span class="code-tag">@import</span>
+						<span class="code-string">"components/header.yame"</span><br><br>
+						<span class="code-tag">&lt;page</span>
+						<span class="code-attr">title</span>=<span class="code-string">"Главная"</span><span class="code-tag">&gt;</span><br>
+                        &nbsp;&nbsp;<span class="code-tag">&lt;header&gt;</span><br>
+                        &nbsp;&nbsp;&nbsp;&nbsp;<span class="code-tag">&lt;h1&gt;</span>Добро
+						пожаловать!<span class="code-tag">&lt;/h1&gt;</span><br>
+                        &nbsp;&nbsp;<span class="code-tag">&lt;/header&gt;</span><br>
+                        &nbsp;&nbsp;<span class="code-tag">@button</span>(<span class="code-string">"Начать"</span>,
+						<span class="code-string">"green"</span>)<br>
+						<span class="code-tag">&lt;/page&gt;</span>
+					</div>
+				</div>
+				<div class="download-section">
+					<div class="download-title">Скачать YAME:</div>
+					<div class="download-links">
+						<a href="#" class="download-btn">YAME Процессор (v1.5)</a>
+						<a href="#" class="download-btn">Плагин для VS Code</a>
+						<a href="#" class="download-btn">Шаблоны проектов</a>
+					</div>
+				</div>
+			</div>
+
+			<!-- YTL Card -->
+			<div class="language-card ytl">
+				<div class="card-header">
+					<h3>YTL</h3>
+					<p>YAML Template Language</p>
+				</div>
+				<div class="card-body">
+					<p class="description">Шаблонный язык на основе YAML с лаконичным синтаксисом для генерации
+						контента.</p>
+					<div class="code-block">
+						<span class="code-comment"># Пример YTL шаблона</span><br>
+						<span class="code-attr">template</span>: <span class="code-string">"productList"</span><br>
+						<span class="code-attr">data</span>:<br>
+                        &nbsp;&nbsp;- <span class="code-attr">name</span>: <span class="code-string">"Ноутбук"</span><br>
+                        &nbsp;&nbsp;&nbsp;&nbsp;<span class="code-attr">price</span>:
+						<span class="code-string">"$999"</span><br>
+                        &nbsp;&nbsp;&nbsp;&nbsp;<span class="code-attr">inStock</span>:
+						<span class="code-string">true</span><br>
+                        &nbsp;&nbsp;- <span class="code-attr">name</span>: <span class="code-string">"Мышь"</span><br>
+                        &nbsp;&nbsp;&nbsp;&nbsp;<span class="code-attr">price</span>:
+						<span class="code-string">"$25"</span><br>
+                        &nbsp;&nbsp;&nbsp;&nbsp;<span class="code-attr">inStock</span>:
+						<span class="code-string">false</span><br>
+						<span class="code-attr">output</span>:<br>
+                        &nbsp;&nbsp;<span class="code-attr">html</span>:<br>
+                        &nbsp;&nbsp;&nbsp;&nbsp;- <span class="code-attr">tag</span>:
+						<span class="code-string">"ul"</span><br>
+                        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="code-attr">class</span>:
+						<span class="code-string">"products"</span><br>
+                        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="code-attr">children</span>:<br>
+                        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="code-attr">for</span>:
+						<span class="code-string">"product in data"</span><br>
+                        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="code-attr">tag</span>:
+						<span class="code-string">"li"</span><br>
+                        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="code-attr">text</span>:
+						<span class="code-string">"{{product.name}} - {{product.price}}"</span>
+					</div>
+				</div>
+				<div class="download-section">
+					<div class="download-title">Скачать YTL:</div>
+					<div class="download-links">
+						<a href="#" class="download-btn">YTL Интерпретатор (v3.2)</a>
+						<a href="#" class="download-btn">Расширение для Sublime</a>
+						<a href="#" class="download-btn">Библиотека шаблонов</a>
+					</div>
+				</div>
+			</div>
+		</div>
+
+		<footer>
+			<p>Демонстрация языков разметки: HTML, XTL, YAME, YTL | Создано для образовательных целей</p>
+		</footer>
+	</div>
+</body>
+
+</html>
